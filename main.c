@@ -17,6 +17,26 @@
 #define CLR_GDK(x, y) \
     (const GdkRGBA) { .red = CLR_16(CLR_R(x)), .green = CLR_16(CLR_G(x)), .blue = CLR_16(CLR_B(x)), .alpha = y }
 
+
+int windowH = 30;
+int windowW = 120;
+double fontSize = 10.6;
+bool allowBell = true;
+bool allowBold = true;
+bool allowHyper = true;
+bool outScroll = true;
+bool keyScroll = true;
+int bgColor = 0x111111;
+int fgColor = 0xffffff;
+int curColor = 0xffffff;
+// consoleFont = ???;
+bool autoMouseHide = true;
+
+
+void parseConfigFile(){
+    //TODO Implement Config file parser
+}
+
 static gboolean on_title_changed(GtkWidget *terminal, gpointer user_data) {
     GtkWidget *window = user_data;
     gtk_window_set_title(window,
@@ -25,6 +45,7 @@ static gboolean on_title_changed(GtkWidget *terminal, gpointer user_data) {
 }
 
 int main(int argc, char *argv[]) {
+    parseConfigFile();
     GtkWidget *window;
     GtkWidget *terminal, *box;
 
@@ -35,7 +56,7 @@ int main(int argc, char *argv[]) {
     gtk_window_set_title(GTK_WINDOW(window), "gumTerm");
 
     vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), 10000);
-    vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), FALSE);
+    vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), TRUE);
     vte_terminal_set_scroll_on_keystroke(VTE_TERMINAL(terminal), TRUE);
     vte_terminal_set_mouse_autohide(VTE_TERMINAL(terminal), TRUE);
 
