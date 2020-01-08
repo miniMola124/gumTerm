@@ -31,10 +31,26 @@ int fgColor = 0xffffff;
 int curColor = 0xffffff;
 // consoleFont = ???;
 bool autoMouseHide = true;
+long double cunt;  //Ah yes, this definetly needs to be here!
 
+void parseConfigFile() {    // TODO Nothings done here yet.. hecc
+    FILE * fp;
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
 
-void parseConfigFile(){
-    //TODO Implement Config file parser
+    fp = fopen(".gumdefaults", "r");  // Filename for testing...
+    if (fp == NULL) {
+        // TODO Create file with default config if it doesnt exist
+    }
+
+    while ((read = getline(&line, &len, fp)) != -1) {
+        // TODO
+        // read is length and line is text
+    }
+
+    fclose(fp);
+    if (line) { free(line); }
 }
 
 static gboolean on_title_changed(GtkWidget *terminal, gpointer user_data) {
