@@ -2,6 +2,9 @@
     "files.associations": {
         "stdbool.h": "c",
         "string.h": "c",
-        "iosfwd": "c"
+        "iosfwd": "c",
+        "string_view": "c",
+        "tuple": "c",
+        "sstream": "c"
     }
 }

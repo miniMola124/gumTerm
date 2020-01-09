@@ -17,7 +17,6 @@
 #define CLR_GDK(x, y) \
     (const GdkRGBA) { .red = CLR_16(CLR_R(x)), .green = CLR_16(CLR_G(x)), .blue = CLR_16(CLR_B(x)), .alpha = y }
 
-
 int windowH = 30;
 int windowW = 120;
 double fontSize = 10.6;
@@ -33,11 +32,21 @@ int curColor = 0xffffff;
 bool autoMouseHide = true;
 long double cunt;  //Ah yes, this definetly needs to be here!
 
-void parseConfigFile() {    // TODO Nothings done here yet.. hecc
-    FILE * fp;
-    char * line = NULL;
+char* replace_char(char* str, char find, char replace){
+    char *current_pos = strchr(str,find);
+    while (current_pos){
+        *current_pos = replace;
+        current_pos = strchr(current_pos,find);
+    }
+    return str;
+}
+
+void parseConfigFile() {  // TODO Nothings done here yet.. hecc
+    FILE *fp;
+    char *line = NULL;
     size_t len = 0;
     ssize_t read;
+    char *delim = "=";
 
     fp = fopen(".gumdefaults", "r");  // Filename for testing...
     if (fp == NULL) {
@@ -47,10 +56,24 @@ void parseConfigFile() {    // TODO Nothings done here yet.. hecc
     while ((read = getline(&line, &len, fp)) != -1) {
         // TODO
         // read is length and line is text
+        if (read != 1) {
+            char *ptr = strtok(line, delim);
+            int init_size = strlen(line);
+            while (ptr != NULL) {
+                char *got = replace_char(replace_char(ptr, "\n", ""), "\r", "");
+                printf("KEY=%s ", got);
+                ptr = strtok(NULL, delim);
+                got = replace_char(replace_char(ptr, "\n", ""), "\r", "");
+                printf("VALUE=%s", got);
+                ptr = strtok(NULL, delim);
+            }
+        }
     }
 
     fclose(fp);
-    if (line) { free(line); }
+    if (line) {
+        free(line);
+    }
 }
 
 static gboolean on_title_changed(GtkWidget *terminal, gpointer user_data) {
