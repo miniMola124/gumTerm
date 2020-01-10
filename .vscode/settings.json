@@ -5,6 +5,7 @@
         "iosfwd": "c",
         "string_view": "c",
         "tuple": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "string": "c"
     }
 }

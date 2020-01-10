@@ -32,11 +32,11 @@ int curColor = 0xffffff;
 bool autoMouseHide = true;
 long double cunt;  //Ah yes, this definetly needs to be here!
 
-char* replace_char(char* str, char find, char replace){
-    char *current_pos = strchr(str,find);
-    while (current_pos){
+char *replace_char(char *str, char find, char replace) {
+    char *current_pos = strchr(str, find);
+    while (current_pos) {
         *current_pos = replace;
-        current_pos = strchr(current_pos,find);
+        current_pos = strchr(current_pos, find);
     }
     return str;
 }
@@ -61,11 +61,14 @@ void parseConfigFile() {  // TODO Nothings done here yet.. hecc
             int init_size = strlen(line);
             while (ptr != NULL) {
                 char *got = replace_char(replace_char(ptr, "\n", ""), "\r", "");
-                printf("KEY=%s ", got);
+                char *currKey = got;
                 ptr = strtok(NULL, delim);
                 got = replace_char(replace_char(ptr, "\n", ""), "\r", "");
-                printf("VALUE=%s", got);
+                char *currVal = got;
                 ptr = strtok(NULL, delim);
+                if (strcmp(tolower(currKey), tolower("KEYNAME")) == 0) {    
+                    // TODO
+                }
             }
         }
     }
