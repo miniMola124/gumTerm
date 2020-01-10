@@ -66,7 +66,7 @@ void parseConfigFile() {  // TODO Nothings done here yet.. hecc
                 got = replace_char(replace_char(ptr, "\n", ""), "\r", "");
                 char *currVal = got;
                 ptr = strtok(NULL, delim);
-                if (strcmp(tolower(currKey), tolower("KEYNAME")) == 0) {    
+                if (currKey = "KEYNAME") {     // ?
                     // TODO
                 }
             }

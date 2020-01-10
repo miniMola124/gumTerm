@@ -6,6 +6,7 @@
         "string_view": "c",
         "tuple": "c",
         "sstream": "c",
-        "string": "c"
+        "string": "c",
+        "cctype": "c"
     }
 }
